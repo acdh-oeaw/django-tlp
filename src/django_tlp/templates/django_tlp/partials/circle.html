@@ -1,0 +1,12 @@
+<input type="radio"
+       name="status"
+       id="{{ object.id }}_{{ color }}"
+       value="{{ color }}"
+       class="tlp"
+       {% if object.status == color %}checked{% elif not object.status and color == default %}checked{% endif %}
+       style="--tlp-background: {{ color }}">
+<label for="{{ object.id }}_{{ color }}"
+       style="--tlp-background: {{ color }}"
+       hx-post="{% url "tlpstatus" object.content_type.id object.object_id %}"
+       hx-target="closest .tlp-container"
+       hx-swap="innerHTML"></label>

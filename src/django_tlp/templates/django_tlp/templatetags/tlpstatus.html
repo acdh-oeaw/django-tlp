@@ -1,0 +1,26 @@
+{% load static %}
+<link href="{% static 'css/django_tlp.css' %}" media="all" rel="stylesheet">
+<span class="tlp-container">
+    <form>
+        {% csrf_token %}
+        <span class="tlps">
+            {% for choice, x in form.fields.status.choices %}
+                {% include "django_tlp/partials/circle.html" with color=choice default=form.fields.status.initial %}
+            {% endfor %}
+            <button type="button"
+                    class="btn btn-secondary btn-sm"
+                    popovertarget="{{ object.pk }}-note-dialog">Note</button>
+            <dialog id="{{ object.pk }}-note-dialog" class="tlpnote" popover>
+                <textarea class="textarea form-control" type="text" name="note">{% if object.note %}{{ object.note }}{% endif %}</textarea>
+                <button class="btn btn-primary"
+                        hx-post="{% url "tlpstatus" object.content_type.id object.object_id %}"
+                        hx-include="previous textarea"
+                        hx-vals='{"status": "{{ object.status }}"}'
+                        popovertarget="{{ object.pk }}-note-dialog"
+                        popovertargetaction="hide"
+                        hx-target="closest .tlp-container"
+                        hx-swap="innerHTML">Save</button>
+            </dialog>
+        </span>
+    </form>
+</span>
