@@ -1,0 +1,36 @@
+form.django-tlp {
+  display: inline;
+}
+input.tlp[type="radio"] {
+  appearance: none;
+}
+input.tlp[type="radio"]+label {
+  border: 2px solid black;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 30px;
+}
+input.tlp[type="radio"]:checked+label {
+  background-color: var(--tlp-background);
+}
+input.tlp[type="radio"]+label:hover {
+  background-color: var(--tlp-background);
+}
+dialog.tlpnote:popover-open {
+  font-size: 1rem;
+  padding: 1em;
+  border: 2px solid darkgrey;
+  min-width: 30vw;
+
+  display: grid;
+  grid-template-columns: auto;
+
+  button {
+    margin-top: 1em;
+  }
+}
+dialog.tlpnote::backdrop {
+  background-color: grey;
+  opacity: 0.5;
+}
